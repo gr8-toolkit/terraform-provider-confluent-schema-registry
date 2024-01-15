@@ -4,7 +4,7 @@ HOSTNAME=github.com
 NAMESPACE=gr8-toolkit
 NAME=schemaregistry
 BINARY=terraform-provider-${NAME}
-VERSION=0.6
+VERSION=0.2.0
 OS_ARCH=linux_amd64
 
 default: install
@@ -24,6 +24,8 @@ release:
 	GOOS=openbsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_openbsd_386
 	GOOS=openbsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_openbsd_amd64
 	GOOS=solaris GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_solaris_amd64
+	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
+	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
 
 install: build
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
