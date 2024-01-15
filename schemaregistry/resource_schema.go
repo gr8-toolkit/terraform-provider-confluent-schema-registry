@@ -109,7 +109,7 @@ func schemaCreate(ctx context.Context, d *schema.ResourceData, meta interface{})
 
 	client := meta.(*srclient.SchemaRegistryClient)
 
-	schema, err := client.CreateSchemaWithArbitrarySubject(subject, schemaString, schemaType, references...)
+	schema, err := client.CreateSchema(subject, schemaString, schemaType, references...)
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -143,7 +143,7 @@ func schemaUpdate(ctx context.Context, d *schema.ResourceData, meta interface{})
 
 	client := meta.(*srclient.SchemaRegistryClient)
 
-	schema, err := client.CreateSchemaWithArbitrarySubject(subject, schemaString, schemaType, references...)
+	schema, err := client.CreateSchema(subject, schemaString, schemaType, references...)
 	if err != nil {
 		if strings.Contains(err.Error(), "409") {
 			return diag.Errorf(`invalid "schema": incompatible`)
@@ -168,7 +168,7 @@ func schemaRead(ctx context.Context, d *schema.ResourceData, meta interface{}) d
 	client := meta.(*srclient.SchemaRegistryClient)
 	subject := extractSchemaVersionID(d.Id())
 
-	schema, err := client.GetLatestSchemaWithArbitrarySubject(subject)
+	schema, err := client.GetLatestSchema(subject)
 	if err != nil {
 		return diag.FromErr(err)
 	}

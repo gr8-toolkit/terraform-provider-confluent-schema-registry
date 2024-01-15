@@ -34,7 +34,7 @@ func dataSourceSchema() *schema.Resource {
 			},
 			"references": {
 				Type:        schema.TypeList,
-				Computed: 	 true,
+				Computed:    true,
 				Description: "The referenced schema names list",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
@@ -71,10 +71,10 @@ func dataSourceSubjectRead(ctx context.Context, d *schema.ResourceData, m interf
 	var err error
 
 	if version > 0 {
-		schema, err = client.GetSchemaByVersionWithArbitrarySubject(subject, version)
+		schema, err = client.GetSchemaByVersion(subject, version)
 
 	} else {
-		schema, err = client.GetLatestSchemaWithArbitrarySubject(subject)
+		schema, err = client.GetLatestSchema(subject)
 	}
 
 	if err != nil {

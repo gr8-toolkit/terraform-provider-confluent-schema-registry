@@ -1,7 +1,7 @@
 # TEST?=$$(go list ./schemaregistry/... | grep -v 'vendor')
 TEST?=./schemaregistry/...
 HOSTNAME=github.com
-NAMESPACE=arkiaconsulting
+NAMESPACE=gr8-toolkit
 NAME=schemaregistry
 BINARY=terraform-provider-${NAME}
 VERSION=0.6
