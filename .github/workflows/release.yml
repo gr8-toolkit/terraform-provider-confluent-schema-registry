@@ -13,7 +13,7 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version-file: "go.mod"
           cache: true
 
       - name: Import GPG key
@@ -40,7 +40,7 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
         with:
