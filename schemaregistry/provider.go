@@ -50,10 +50,10 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	if (url != "") {
 		client := srclient.CreateSchemaRegistryClient(url)
 
-		if (username != "") && (password != "") {		
-			client.SetCredentials(username, password)	
+		if (username != "") && (password != "") {
+			client.SetCredentials(username, password)
 		}
-		
+
 		return client, diags
 	}
 

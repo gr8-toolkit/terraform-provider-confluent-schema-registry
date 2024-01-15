@@ -1,12 +1,12 @@
 {
-    "type": "record",
-    "name": "userAdded",
-    "namespace": "akc.test",
-    "fields": [
-        {
-            "name": "firstName",
-            "type": "string",
-            "description": "toto"
-        }
-    ]
+  "type": "record",
+  "name": "userAdded",
+  "namespace": "akc.test",
+  "fields": [
+    {
+      "name": "firstName",
+      "type": "string",
+      "description": "toto"
+    }
+  ]
 }

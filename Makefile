@@ -1,7 +1,7 @@
 # TEST?=$$(go list ./schemaregistry/... | grep -v 'vendor')
 TEST?=./schemaregistry/...
 HOSTNAME=github.com
-NAMESPACE=arkiaconsulting
+NAMESPACE=gr8-toolkit
 NAME=schemaregistry
 BINARY=terraform-provider-${NAME}
 VERSION=0.6
@@ -31,9 +31,13 @@ install: build
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 	mv ./dist/${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
-test: 
-	go test -i $(TEST) || exit 1                                                   
-	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4                    
+test:
+	go test -i $(TEST) || exit 1
+	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
 
-testacc: 
+testacc:
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+
+docs-gen:
+	tfplugindocs generate
+	pre-commit run markdownlint --all-files
