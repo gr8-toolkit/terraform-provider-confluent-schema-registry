@@ -8,7 +8,7 @@ A terraform provider for managing schemas in a Confluent schema registry
 terraform {
     required_providers {
         schemaregistry = {
-            source = "arkiaconsulting/confluent-schema-registry"
+            source = "gr8-toolkit/confluent-schema-registry"
         }
     }
 }
