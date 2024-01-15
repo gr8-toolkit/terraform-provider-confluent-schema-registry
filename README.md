@@ -1,8 +1,10 @@
 # terraform-provider-confluent-schema-registry
+
 A terraform provider for managing schemas in a Confluent schema registry
 
 ## Provider configuration
-```
+
+```terraform
 terraform {
     required_providers {
         schemaregistry = {
@@ -17,10 +19,12 @@ provider "schemaregistry" {
     password            = "<confluent_schema_registry_password>"
 }
 ```
+
 _You can omit the credential details by defining the environment variables `SCHEMA_REGISTRY_URL`, `SCHEMA_REGISTRY_USERNAME`, `SCHEMA_REGISTRY_PASSWORD`_
 
 ## The schema resource
-```
+
+```terraform
 resource "schemaregistry_schema" "main" {
   subject = "<subject_name>"
   schema  = file("<avro_schema_file>")
@@ -36,7 +40,7 @@ Please refer to Confluent [Schema Registry API Reference](https://docs.confluent
 
 Reference the event schema `resource` from a schema with reference wil upgrade a reference alongside with its referenced schema.
 
-```
+```terraform
 resource "schemaregistry_schema" "referenced_event" {
   subject = "referenced_event_subject"
   schema  = "{\"type\":\"record\",\"name\":\"event\",\"namespace\":\"akc.test\",\"fields\":[{\"name\":\"foo\",\"type\":\"string\"}]}"
@@ -71,7 +75,7 @@ resource "schemaregistry_schema" "with_reference" {
 
 Use a `dataSource` to stick a reference to a **given version**, while upgrading the referenced event schema.
 
-```
+```terraform
 resource "schemaregistry_schema" "referenced_event_latest" {
   subject = "referenced_event_subject"
   schema  = file("<avro_schema_file_updated>")
@@ -95,7 +99,8 @@ resource "schemaregistry_schema" "with_reference_to_v1" {
 ```
 
 ## The schema data source
-```
+
+```terraform
 data "schemaregistry_schema" "main" {
   subject = "<subject_name>"
 }
@@ -114,6 +119,7 @@ output "schema_string" {
 ```
 
 ## Importing an existing schema
-`
+
+```bash
 terraform import schemaregistry_schema.main <subject_name>
-`
+```
